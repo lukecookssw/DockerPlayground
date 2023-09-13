@@ -10,7 +10,6 @@ namespace TodoApi.Controllers;
 public class TodosController : ControllerBase
 {
     private readonly TodoContext _context;
-
     private readonly ILogger<TodosController> _logger;
 
     public TodosController(ILogger<TodosController> logger, TodoContext context)
