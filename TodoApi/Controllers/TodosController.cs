@@ -24,4 +24,11 @@ public class TodosController : ControllerBase
         List<Todo> results = await _context.TodoItems.ToListAsync(ct);
         return results;
     }
+
+    [HttpPost("Add")]
+    public async Task Post(Todo model, CancellationToken ct = default)
+    {
+        await _context.TodoItems.AddAsync(model, ct);
+        await _context.SaveChangesAsync(ct);
+    }
 }
