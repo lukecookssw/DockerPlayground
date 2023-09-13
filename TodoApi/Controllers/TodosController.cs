@@ -7,19 +7,19 @@ namespace TodoApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class TodosController : ControllerBase
 {
     private readonly TodoContext _context;
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<TodosController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, TodoContext context)
+    public TodosController(ILogger<TodosController> logger, TodoContext context)
     {
-        _logger = logger;
-        _context = context;
+        _logger     = logger;
+        _context    = context;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet("GetAll")]
     public async Task<IEnumerable<Todo>> Get(CancellationToken ct = default)
     {
         List<Todo> results = await _context.TodoItems.ToListAsync(ct);

@@ -13,6 +13,17 @@ if (connectionString is null)
 builder.Services.AddDbContext<TodoContext>(opt =>
     opt.UseSqlServer(connectionString));
 
+// enable CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +40,9 @@ if (app.Environment.IsDevelopment())
 
 // TODO: Add back in when Docker is less shit.
 //app.UseHttpsRedirection();
+
+// enable CORS
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 
